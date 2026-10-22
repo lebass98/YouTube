@@ -1,0 +1,11 @@
+# 빌드 결과물 (설치 파일은 GitHub 릴리즈에 올림)
+.build/
+dist/
+
+# macOS / 외장하드(exFAT) 숨김 파일
+.DS_Store
+._*
+
+# 편집기
+.swiftpm/
+*.xcodeproj/

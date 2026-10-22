@@ -1,0 +1,9 @@
+#!/bin/bash
+# 설치가 끝나면 현재 로그인한 사용자로 앱 실행
+USER_NAME=$(stat -f%Su /dev/console)
+if [ -n "$USER_NAME" ] && [ "$USER_NAME" != "root" ]; then
+    USER_ID=$(id -u "$USER_NAME")
+    pkill -x MyTube 2>/dev/null || true
+    launchctl asuser "$USER_ID" sudo -u "$USER_NAME" open "/Applications/MyTube.app" || true
+fi
+exit 0
