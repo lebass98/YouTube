@@ -77,7 +77,9 @@ for d in "$HOME"/Library/CloudStorage/GoogleDrive-*; do
     done
 done
 if [ -n "$DRIVE" ]; then
-    DEST="$DRIVE/MyTube 배포판"
+    # 폴더를 다른 곳(예: AI작업)으로 옮겼을 수 있으니 먼저 찾고, 없을 때만 AI작업 아래에 만듦
+    DEST=$(find "$DRIVE" -maxdepth 3 -type d -name "MyTube 배포판" 2>/dev/null | head -1)
+    [ -z "$DEST" ] && DEST="$DRIVE/AI작업/MyTube 배포판"
     mkdir -p "$DEST"
     cp -X "$OUT" "$DEST/"
     ls -t "$DEST"/MyTube-*.pkg 2>/dev/null | tail -n +4 | while read -r old; do rm -f "$old"; done
